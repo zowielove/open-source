@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+	public class CheckCal {
+	   public static void main(String[] args) {
+	
+	      Scanner scanner = new Scanner(System.in);
+	      
+	      double A, B, Result;
+	      String Sign;
+	      System.out.print("연산>>");
+	      A = scanner.nextDouble();
+	      Sign = scanner.next();
+	      B = scanner.nextDouble();
+	 
+	      switch(Sign) {
+	      case "+" :
+	         Result = A+B;
+	         System.out.print(A+Sign+B+"의 계산 결과는 "+Result);
+	         break;
+	      case "-":
+	         Result = A-B;
+	         System.out.print(A+Sign+B+"의 계산 결과는 "+Result);
+	         break;
+	      case "*":
+	         Result = A*B;
+	         System.out.print(A+Sign+B+"의 계산 결과는 "+Result);
+	         break;
+	      case "/":
+	         if(B==0) {
+	            System.out.print("0으로 나눌 수 없습니다.");
+	            break;
+	         }
+	         else {
+	            Result = A / B;
+	            System.out.print(A+Sign+B+"의 계산 결과는 "+Result);
+	            break;
+	         }
+	     
+	      }
+	     scanner.close();
+	}
+}
