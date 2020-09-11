@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class CheckOverlapCircle {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int AX,AY,AR;
+		int BX,BY,BR;
+		double Distance;
+		
+		System.out.print("첫번째 원의 중심과 반지름 입력 >> ");
+		AX=scanner.nextInt();
+		AY=scanner.nextInt();
+		AR=scanner.nextInt();
+		System.out.print("두번째 원의 중심과 반지름 입력 >> ");
+		BX=scanner.nextInt();
+		BY=scanner.nextInt();
+		BR=scanner.nextInt();
+		
+		Distance=Math.sqrt((AX-BX)*(AX-BX)+(AY-BY)*(AX-BX));
+		
+		if(Distance <= AR+BR ) {
+			System.out.print("두 원은 서로 겹친다.");
+		}
+		else {
+			System.out.print("두 원은 겹치지 않는다.");
+		}
+		
+			
+	}
+
+}
