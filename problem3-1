@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+public class Chapter3_1 {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		
+		String Result[] = {"가위", "바위", "보"};
+		
+		System.out.println("컴퓨터와 가위 바위 보 게임을 시작 합니다.");
+		
+		while(true) {
+			System.out.print("가위 바위 보! >> ");
+			String Me = scanner.next();
+			
+			int Com = (int)(Math.random()*3); // 0보다 크고 1보다 작은 실수값을 반환하는 Math.random() 을 사용 후 정수형으로 교환하여 0,1,2 이 3가지 값이 나오게 함.
+			
+			if(Me.equals("그만")) {
+				System.out.print("게임을 종료합니다..."); //그만이라는 글자가 들어오면 해당 문구 출력 후 반복문 탈출
+				break;
+			}
+			else if(Result[Com].equals("가위")) {
+				if(Me.equals(Result[Com])) {
+					System.out.println("사용자 = 가위, 컴퓨터 = 가위, 비겼습니다."); // 비겼는지 비교
+				}
+				else if(Me.equals("바위")) {
+					System.out.println("사용자 = 바위, 컴퓨터 = 가위, 사용자가 이겼습니다.");
+				}
+				else if(Me.equals("보")) {
+					System.out.println("사용자 = 보, 컴퓨터 = 가위, 컴퓨터가 이겼습니다.");
+				}
+			}
+			else if(Result[Com].equals("바위")) {
+				if(Me.equals(Result[Com])) {
+					System.out.println("사용자 = 바위, 컴퓨터 = 바위, 비겼습니다."); // 비겼는지 비교
+				}
+				else if(Me.equals("가위")) {
+					System.out.println("사용자 = 가위, 컴퓨터 = 바위, 컴퓨터가 이겼습니다.");
+				}
+				else if(Me.equals("보")) {
+					System.out.println("사용자 = 보, 컴퓨터 = 바위, 사용자가 이겼습니다.");
+				}
+			}
+			else if(Result[Com].equals("보")) {
+				if(Me.equals(Result[Com])) {
+					System.out.println("사용자 = 보, 컴퓨터 = 보, 비겼습니다."); // 비겼는지 비교
+				}
+				else if(Me.equals("가위")) {
+					System.out.println("사용자 = 가위, 컴퓨터 = 보, 사용자가 이겼습니다.");
+				}
+				else if(Me.equals("바위")) {
+					System.out.println("사용자 = 바위, 컴퓨터 = 보, 컴퓨터가 이겼습니다.");
+				}
+			}
+		}
+		scanner.close();
+	}
+}
