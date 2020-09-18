@@ -1,0 +1,22 @@
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+public class Chapter3_1 {
+		public static void main(String[] args) {
+		     Scanner scanner = new Scanner(System.in);
+		     while(true) {
+		          System.out.print("곱하고자 하는 두 수 입력 >> ");
+		          try{
+		             int n = scanner.nextInt();
+		             int m = scanner.nextInt();
+		             System.out.print(n + "x" + m + "=" + n*m); // 입력 후 이상 없을 시 결과창 출력
+		             break; //while문 탈출
+		             }
+		          catch(InputMismatchException e) { //예외처리
+		              System.out.println("실수는 입력하면 안됩니다."); // 에러문구 출력
+		              scanner.nextLine(); // 이전 입력값 초기화
+		           }
+		        }
+		        scanner.close();
+		    }
+}
