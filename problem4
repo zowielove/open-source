@@ -1,0 +1,152 @@
+package Java_Homework_week4;
+
+import java.util.Scanner;
+
+class Seat{
+   Scanner scanner; // 스캐너 선언
+   String S[]; // S석 선언
+   String A[]; // A석 선언
+   String B[]; // B석 선언
+   
+   Seat() { // 초기화과정
+      scanner = new Scanner(System.in); // 스캐너 시작
+      S = new String[10];
+      A = new String[10];
+      B = new String[10];
+      for(int i=0; i<S.length; i++) { // 초기화, 초기값을 빈좌석으로 설정
+         S[i] = "___";
+         A[i] = "___";
+         B[i] = "___";
+      }
+   }
+   
+   public static void PrintSeat(String seat[]) { // 해당 칸의 모든 좌석들을 출력
+      for(int i=0; i<seat.length; i++) { // 좌석길이(=10) 만큼 돌며 좌석들 출력
+         System.out.print(" "+seat[i]+" " );
+      }
+      System.out.println();
+   }
+   
+   public void Checkall() {  // 모든 좌석 출력
+      System.out.print("S>>");
+      Seat.PrintSeat(S);
+      System.out.print("A>>");
+      Seat.PrintSeat(A);
+      System.out.print("B>>");
+      Seat.PrintSeat(B);
+      System.out.println("<<<조회를 완료하였습니다.>>>");
+   }
+   
+   public void Addseat(String seat[]) { 
+	      System.out.print("이름>>");
+	      String name = scanner.next();
+	      while(true) {
+	         System.out.print("번호>>");
+	         int num = scanner.nextInt();
+	         num--;
+	         if(seat[num].equals("___")) {
+	            seat[num] = name;
+	            break;
+	         }
+	         else {
+	            System.out.println("다른 좌석을 선택해 주세요.");
+	         }
+	      }
+	   }
+   
+   public void Reserve() { // 예약기능
+      while(true) {
+         System.out.print("좌석구분 S(1), A(2), B(3)>>");
+         int select = scanner.nextInt();
+         switch(select) {
+         case 1: 
+            System.out.print("S>>");
+            PrintSeat(S);
+            Addseat(S);
+            return;
+         case 2:
+            System.out.print("A>>");
+            PrintSeat(A);
+            Addseat(A);
+            return;
+         case 3: 
+            System.out.print("B>>");
+            PrintSeat(B);
+            Addseat(B);
+            return;
+         default:
+            System.out.println("다시 입력해 주세요.");
+         }
+      }
+   }
+   
+   public void Choice_For_DeleteSeat() { //지울 좌석 선택 
+      while(true) {
+         System.out.print("좌석 S:1, A:2, B:3>>");
+         int inputnum = scanner.nextInt();
+         switch(inputnum) {
+         case 1: 
+            System.out.print("S>>");
+            PrintSeat(S); // S좌석 전체 출력
+            DeleteSeat(S);
+            return;
+         case 2:
+            System.out.print("A>>");
+            PrintSeat(A); // A좌석 전체 출력
+            DeleteSeat(A);
+            return;
+         case 3: 
+            System.out.print("B>>");
+            PrintSeat(B); // B좌석 전체 출력
+            DeleteSeat(B);
+            return;
+         default:
+            System.out.println("다시 입력해 주세요.");
+         }
+      }
+   }
+   
+   public void DeleteSeat(String seat[]) {
+      System.out.print("이름>>");
+      String name = scanner.next();
+      for(int i=0; i<seat.length; i++) { // 해당 배열을 모두 돌며 맞는 이름이 있을 경우 지우고 초기화
+         if(name.equals(seat[i])) {
+            seat[i] = "___";
+            break;
+         }
+      }
+   }
+   
+}
+
+
+public class Homework_4week {
+   
+   public static void main(String[] args) {
+    
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("명품콘서트홀 예약 시스템입니다.");
+      Seat seat = new Seat();
+      while(true) {
+         System.out.print("예약:1, 조회:2, 취소:3, 끝내기:4 >> "); // 선택지 출력
+         int inputnum = scanner.nextInt();
+         switch(inputnum) { // 입력된 값에 따라서
+         case 1:
+            seat.Reserve(); // 1번 선택시 예약기능
+            break;
+         case 2:
+            seat.Checkall(); // 2번 선택시 조회기능
+            break;
+         case 3:
+            seat.Choice_For_DeleteSeat(); // 3번 선택시 예약 취소
+            break;
+         case 4:
+            scanner.close(); // 4번 선택시 종료
+            return;
+         default :
+            System.out.println("다시 입력해 주세요."); // 오류메세지 출력
+         }
+      }
+   }
+
+}
