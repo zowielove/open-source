@@ -1,0 +1,109 @@
+import java.util.Scanner;
+import java.util.Vector;
+
+class Nation { // 나라 클래스
+	private String country;
+	private String capital;
+	public Nation(String country, String capital) {
+		this.country = country;
+		this.capital = capital;
+	}
+	public String getCountry() {
+		return country; // 나라 이름 불러오기
+	}
+	public String getCapital() {
+		return capital; // 수도 이름 불러오기
+	}
+}
+
+public class Gamesetting {
+	private Vector<Nation> store = new Vector<Nation>();
+	private Scanner scanner = new Scanner(System.in);
+	
+	public Gamesetting() {
+		// 초기 기본값으로 9개의 나라와 수도 저장
+		store.add(new Nation("태국", "방콕"));
+		store.add(new Nation("그리스", "아테네"));
+		store.add(new Nation("일본", "동경"));
+		store.add(new Nation("프랑스", "파리"));
+		store.add(new Nation("중국", "베이징"));
+		store.add(new Nation("미국", "워싱턴"));
+		store.add(new Nation("스페인", "마드리드"));
+		store.add(new Nation("캐나다", "오타와"));
+		store.add(new Nation("러시아", "모스크바"));
+	}
+	
+	public void Menu() {
+		System.out.println("**** 수도 맞추기 게임을 시작합니다. ****");
+		while(true) {
+			System.out.print("입력:1, 퀴즈:2, 종료:3>> ");
+			int menu = scanner.nextInt();
+			switch(menu) {
+				case 1: 
+					input(); 
+					break;
+				case 2:
+					quiz();
+					break;
+				case 3: 
+					System.out.println("게임을 종료합니다.");
+					return;
+				default: 
+					System.out.println("잘못된 입력입니다.");
+			}
+		}
+		
+	}
+	private int Check(String country) {
+		for(int i=0; i<store.size(); i++) { // 저장된 사이즈만큼 돌며 해당하는 나라가 잇는지 확인
+			if(store.get(i).getCountry().equals(country)) { 
+				return 1;
+			}
+		}
+		
+		return 0;
+	}
+	private void input() {
+		int n = store.size();
+		System.out.println("현재 " + n + "개 나라와 수도가 입력되어 있습니다.");
+		n++;
+		while(true) {
+			System.out.print("나라와 수도 입력" + n + ">> ");
+			String country = scanner.next(); 
+			if(country.equals("그만")) {
+				break;
+			}
+			String capital = scanner.next(); 
+			if(Check(country) == 1) {  // 중복검사
+				System.out.println(country + "는 이미 있습니다!");
+				continue;
+			}
+				
+			store.add(new Nation(country, capital));
+			n++;
+		}
+	}
+	private void quiz() {
+		while(true) {
+			int index = (int)(Math.random()*store.size()); // 저장된 크기 만큼의 랜덤난수 생성
+			Nation nation = store.get(index); // 랜덤 나라 호출
+			String question = nation.getCountry();  // 나라 이름 호출
+			String answer = nation.getCapital(); // 위에서 호출한 나라의 수도 호출
+			System.out.print(question + "의 수도는? ");
+			
+			String capitalFromUser = scanner.next(); // 사용자의 입력
+			if(capitalFromUser.equals("그만")) {
+				break;
+			}
+			else if(capitalFromUser.equals(answer))
+				System.out.println("정답!!");
+			else
+				System.out.println("아닙니다!!");				
+		}	
+		
+	}
+	public static void main(String[] args) {
+		Gamesetting game = new Gamesetting();
+		game.Menu();
+	}
+}
