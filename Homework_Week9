@@ -1,0 +1,53 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+ 
+public class HomeWork_Week9 extends JFrame{
+	HomeWork_Week9(){
+        setTitle("Open Challenge 9"); // 해당 프레임의 타이틀 설정
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // 윈도우 종료시 프로그램 종료하도록 설정
+        Container c = getContentPane();
+        c.setLayout(new BorderLayout()); 
+        c.add(new NorthPanel(),BorderLayout.NORTH); // North 영역 패널 추가
+        c.add(new CenterPanel(),BorderLayout.CENTER); // Center 영역 패널 추가
+        setSize(400,400); // 윈도우크기 설정
+        setVisible(true);
+         
+    }
+    public static void main(String[] args) { // 강의에서처럼 프레임 클래스내에 메인 구현
+        new HomeWork_Week9();
+    }
+     
+}
+class NorthPanel extends JPanel{         // North 패널 생성
+    NorthPanel(){
+        setBackground(Color.LIGHT_GRAY); // North 패널 색 지정
+        this.add(new JButton("Open"));   // OPEN 버튼생성
+        this.add(new JButton("Read"));   // READ 버튼생성
+        this.add(new JButton("Close"));  // CLOSE 버튼생성
+    }
+}
+class CenterPanel extends JPanel{         // Center 패널 생성
+    CenterPanel(){
+        this.setLayout(null);
+        String text[] = {"Hello", "Java", "Love"};
+        int x;
+        int y;
+        // 글자들의 좌표를 입력받기 위해 할당
+        JLabel a;       // 라벨 할당
+        for(int i=0;i<3;i++) {
+            x = (int)(Math.random()*300); 
+            y = (int)(Math.random()*300);
+            a = new JLabel(text[i]);
+            a.setLocation(x, y); 
+            a.setSize(50,10);
+            this.add(a);
+        }
+    }
+}
